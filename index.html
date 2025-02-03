@@ -3,72 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Premium - Login</title>
+    <title>Curso Premium de Programação</title>
     <style>
         :root {
-            --primary-color: #4A90E2;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --border-glass: rgba(255, 255, 255, 0.3);
-            --text-color: #fff;
+            --bg-color: #f4f4f4;
+            --primary-color: #007BFF;
+            --text-color: #333;
         }
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: url('stream-binary-code-design-vector_53876-164420.avif') no-repeat center center/cover;
-            backdrop-filter: blur(5px);
+            background-color: var(--bg-color);
+            text-align: center;
+            transition: background 0.3s ease;
+            background-image: url('stream-binary-code-design-vector_53876-164420.avif'); /* Imagem de fundo */
+            background-size: cover;
+            background-position: center;
         }
         .container {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-glass);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            width: 350px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 50px;
         }
-        h1 {
-            color: var(--text-color);
-            margin-bottom: 15px;
+        .login-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         input {
-            width: 100%;
+            width: calc(100% - 20px);
             padding: 10px;
             margin: 10px 0;
-            border: none;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
             text-align: center;
         }
         button {
             background: var(--primary-color);
             color: white;
             border: none;
-            padding: 12px;
-            font-size: 16px;
+            padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
-            transition: 0.3s;
         }
         button:hover {
-            background: #357ABD;
-        }
-        .bg-selector {
-            margin-top: 15px;
-            color: var(--text-color);
+            background: #0056b3;
         }
         .corner-login {
             position: absolute;
             top: 10px;
             right: 10px;
-            color: var(--text-color);
             font-size: 14px;
+        }
+        .bg-selector {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -76,11 +71,13 @@
     <div class="corner-login">Usuário: admin | Senha: 1234</div>
     <div class="container">
         <h1>Bem-vindo ao Curso Premium</h1>
-        <p style="color: var(--text-color);">Aprimore suas habilidades com conteúdos exclusivos!</p>
+        <p>Aprimore suas habilidades com conteúdos exclusivos!</p>
         
-        <input type="text" id="username" placeholder="Usuário">
-        <input type="password" id="password" placeholder="Senha">
-        <button onclick="login()">Entrar</button>
+        <div class="login-box">
+            <input type="text" id="username" placeholder="Usuário">
+            <input type="password" id="password" placeholder="Senha">
+            <button onclick="login()">Entrar</button>
+        </div>
         
         <div class="bg-selector">
             <label for="bg-file">Escolha um fundo:</label>
@@ -90,8 +87,8 @@
     
     <script>
         function login() {
-            let user = document.getElementById("username").value.trim();
-            let pass = document.getElementById("password").value.trim();
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
             
             if (user === "admin" && pass === "1234") {
                 window.location.href = "principal.html";
@@ -105,7 +102,7 @@
             if (file) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    document.body.style.backgroundImage = `url(${e.target.result})`;
+                    document.body.style.backgroundImage = url(${e.target.result});
                 }
                 reader.readAsDataURL(file);
             }
