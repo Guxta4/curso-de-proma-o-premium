@@ -5,60 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curso Premium</title>
     <style>
+        :root {
+            --bg-color: #f4f4f4;
+            --primary-color: #007BFF;
+            --text-color: #333;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: var(--bg-color);
             text-align: center;
+            transition: background 0.3s ease;
+            background-image: url(''); /* Imagem de fundo */
+            background-size: cover;
+            background-position: center;
         }
         .container {
-            width: 80%;
+            width: 90%;
+            max-width: 400px;
             margin: auto;
             padding: 20px;
             background: white;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             margin-top: 50px;
         }
         .login-box {
-            background: #fff;
-            padding: 20px;
-            margin: 20px auto;
-            width: 300px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         input {
-            width: 100%;
+            width: calc(100% - 20px);
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
+            text-align: center;
         }
         button {
-            background: #007BFF;
+            background: var(--primary-color);
             color: white;
             border: none;
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
         }
         button:hover {
             background: #0056b3;
         }
+        .corner-login {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 14px;
+        }
+        .bg-selector {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
+    <div class="corner-login">Usuário: admin | Senha: 1234</div>
     <div class="container">
         <h1>Bem-vindo ao Curso Premium</h1>
         <p>Aprimore suas habilidades com conteúdos exclusivos!</p>
         
         <div class="login-box">
-            <h2>Login</h2>
             <input type="text" id="username" placeholder="Usuário">
             <input type="password" id="password" placeholder="Senha">
             <button onclick="login()">Entrar</button>
+        </div>
+        
+        <div class="bg-selector">
+            <label for="bg-file">Escolha um fundo:</label>
+            <input type="file" id="bg-file" accept="image/*" onchange="changeBackgroundFile()">
         </div>
     </div>
     
@@ -68,9 +91,20 @@
             let pass = document.getElementById("password").value;
             
             if (user === "admin" && pass === "1234") {
-                alert("Login bem-sucedido! Bem-vindo ao curso premium.");
+                window.location.href = "principal.html";
             } else {
                 alert("Usuário ou senha incorretos.");
+            }
+        }
+        
+        function changeBackgroundFile() {
+            let file = document.getElementById("bg-file").files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    document.body.style.backgroundImage = `url(${e.target.result})`;
+                }
+                reader.readAsDataURL(file);
             }
         }
     </script>
