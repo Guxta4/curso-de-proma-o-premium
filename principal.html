@@ -6,9 +6,9 @@
     <title>Página Principal</title>
     <style>
         :root {
-            --bg-color: #f4f4f4;
-            --primary-color: #007BFF;
-            --text-color: #333;
+            --bg-color: #0a0a0a;
+            --text-color: #fff;
+            --neon-green: #39ff14;
         }
         body {
             font-family: Arial, sans-serif;
@@ -16,48 +16,83 @@
             padding: 0;
             background-color: var(--bg-color);
             text-align: center;
-            transition: background 0.3s ease;
-            background-size: cover;
-            background-position: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
         h1 {
-            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
-        p {
-            color: var(--text-color);
+        .neon-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            position: relative;
+            transition: 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        .neon-button::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(57, 255, 20, 0.4) 10%, rgba(0, 0, 0, 0) 80%);
+            transition: 0.5s ease-in-out;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+        .neon-button:hover::before {
+            opacity: 1;
+        }
+        .neon-button:hover {
+            box-shadow: 0 0 20px var(--neon-green);
+            background-color: rgba(57, 255, 20, 0.1);
         }
         .bg-selector {
             margin-top: 20px;
         }
+        input[type="file"] {
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Bem-vindo à Página Principal</h1>
-        <p>Explore os conteúdos exclusivos do nosso curso premium!</p>
-        
-        <div class="bg-selector">
-            <label for="bg-file">Escolha um fundo:</label>
-            <input type="file" id="bg-file" accept="image/*" onchange="changeBackgroundFile()">
-        </div>
+
+    <h1>Bem-vindo ao Curso Premium</h1>
+
+    <!-- Botão neon verde -->
+    <a href="https://seulink.com" class="neon-button">Curso</a>
+
+    <!-- Opção de personalizar o fundo -->
+    <div class="bg-selector">
+        <label for="bg-file">Escolha um fundo:</label>
+        <input type="file" id="bg-file" accept="image/*" onchange="changeBackgroundFile()">
     </div>
-    
+
     <script>
         function changeBackgroundFile() {
             let file = document.getElementById("bg-file").files[0];
             if (file) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    document.body.style.backgroundImage = "url('" + e.target.result + "')";
-                };
+                    document.body.style.backgroundImage = `url(${e.target.result})`;
+                }
                 reader.readAsDataURL(file);
             }
         }
     </script>
+
 </body>
 </html>
