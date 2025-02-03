@@ -17,7 +17,7 @@
             background-color: var(--bg-color);
             text-align: center;
             transition: background 0.3s ease;
-            background-image: url('stream-binary-code-design-vector_53876-164420.avif'); /* Imagem de fundo */
+            background-image: url('stream-binary-code-design-vector_53876-164420.avif'); 
             background-size: cover;
             background-position: center;
         }
@@ -35,11 +35,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
         input {
             width: calc(100% - 20px);
             padding: 10px;
-            margin: 10px 0;
+            margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
             text-align: center;
@@ -56,28 +63,22 @@
         button:hover {
             background: #0056b3;
         }
-        .corner-login {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 14px;
-        }
         .bg-selector {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="corner-login">Usuário: admin | Senha: 1234</div>
+
+    <div class="login-box">
+        <input type="text" id="username" placeholder="Usuário">
+        <input type="password" id="password" placeholder="Senha">
+        <button onclick="login()">Entrar</button>
+    </div>
+
     <div class="container">
         <h1>Bem-vindo ao Curso Premium</h1>
         <p>Aprimore suas habilidades com conteúdos exclusivos!</p>
-        
-        <div class="login-box">
-            <input type="text" id="username" placeholder="Usuário">
-            <input type="password" id="password" placeholder="Senha">
-            <button onclick="login()">Entrar</button>
-        </div>
         
         <div class="bg-selector">
             <label for="bg-file">Escolha um fundo:</label>
@@ -102,8 +103,8 @@
             if (file) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    document.body.style.backgroundImage = url(${e.target.result});
-                }
+                    document.body.style.backgroundImage = "url('" + e.target.result + "')";
+                };
                 reader.readAsDataURL(file);
             }
         }
